@@ -252,8 +252,5 @@ const AttendanceHistory = ({ student }) => (
     )}
   </div>
 );
-    </div>
-  );
-};
 
 export default AttendanceList;
