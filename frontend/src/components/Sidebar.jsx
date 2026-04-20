@@ -3,8 +3,9 @@ import { Users, Calendar, LayoutDashboard, GraduationCap } from 'lucide-react';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
   const menuItems = [
+    { id: 'dashboard', label: 'Bosh sahifa', icon: LayoutDashboard },
     { id: 'students', label: 'Talabalar', icon: Users },
-    { id: 'groups', label: 'Guruhlar', icon: LayoutDashboard },
+    { id: 'groups', label: 'Guruhlar', icon: GraduationCap },
     { id: 'attendance', label: 'Davomat', icon: Calendar },
   ];
 

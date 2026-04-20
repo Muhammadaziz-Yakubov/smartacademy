@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import StudentList from './components/StudentList';
 import AttendanceList from './components/AttendanceList';
 import GroupList from './components/GroupList';
+import Dashboard from './components/Dashboard';
 
 // Configure Axios
 const api = axios.create({
@@ -13,7 +14,7 @@ const api = axios.create({
 });
 
 function App() {
-  const [activeTab, setActiveTab] = useState('students');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [students, setStudents] = useState([]);
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -140,6 +141,7 @@ function App() {
 
   const getPageTitle = () => {
     switch(activeTab) {
+      case 'dashboard': return 'Bosh sahifa';
       case 'students': return 'Talabalar';
       case 'groups': return 'Guruhlar';
       case 'attendance': return 'Davomat';
@@ -193,6 +195,12 @@ function App() {
             </div>
           ) : (
             <>
+              {activeTab === 'dashboard' && (
+                <Dashboard 
+                  students={students} 
+                  groups={groups}
+                />
+              )}
               {activeTab === 'students' && (
                 <StudentList 
                   students={filteredData} 
