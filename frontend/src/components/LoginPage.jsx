@@ -104,7 +104,7 @@ const LoginPage = ({ onLogin }) => {
 
         {/* Footer info */}
         <p className="text-center mt-8 text-slate-400 text-sm font-medium">
-          &copy; 2026 Smart Academy. Barcha huquqlar himoyalangan.
+          &copy; Yaratuvchi: <a href="https://t.me/yakubovdev">Muhammadaziz Yakubov</a>
         </p>
       </div>
     </div>
