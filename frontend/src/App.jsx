@@ -7,6 +7,7 @@ import StudentList from './components/StudentList';
 import AttendanceList from './components/AttendanceList';
 import GroupList from './components/GroupList';
 import Dashboard from './components/Dashboard';
+import LoginPage from './components/LoginPage';
 
 // Configure Axios
 const api = axios.create({
@@ -14,6 +15,7 @@ const api = axios.create({
 });
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('smart_academy_auth') === 'true');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [students, setStudents] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -40,8 +42,21 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [isLoggedIn]);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem('smart_academy_auth', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('smart_academy_auth');
+    toast.success('Xayr, salomat bo\'ling!');
+  };
 
   const addStudent = async (studentData) => {
     try {
@@ -149,10 +164,19 @@ function App() {
     }
   };
 
+  if (!isLoggedIn) {
+    return (
+      <>
+        <LoginPage onLogin={handleLogin} />
+        <Toaster position="bottom-right" />
+      </>
+    );
+  }
+
   return (
     <div className="flex h-screen bg-slate-50 font-sans text-slate-900 overflow-hidden">
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">

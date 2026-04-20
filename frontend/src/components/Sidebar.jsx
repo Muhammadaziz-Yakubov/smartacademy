@@ -1,7 +1,7 @@
 import React from 'react';
-import { Users, Calendar, LayoutDashboard, GraduationCap } from 'lucide-react';
+import { Users, Calendar, LayoutDashboard, GraduationCap, LogOut } from 'lucide-react';
 
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const Sidebar = ({ activeTab, setActiveTab, onLogout }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Bosh sahifa', icon: LayoutDashboard },
     { id: 'students', label: 'Talabalar', icon: Users },
@@ -38,7 +38,15 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         ))}
       </nav>
 
-     
+      <div className="p-6 border-t border-slate-100">
+        <button 
+          onClick={onLogout}
+          className="w-full flex items-center space-x-3 px-4 py-3.5 rounded-2xl text-rose-500 hover:bg-rose-50 transition-all duration-200 font-semibold text-[15px]"
+        >
+          <LogOut className="w-5 h-5" />
+          <span>Chiqish</span>
+        </button>
+      </div>
     </aside>
   );
 };
