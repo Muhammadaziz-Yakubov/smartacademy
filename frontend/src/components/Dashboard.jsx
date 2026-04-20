@@ -59,24 +59,24 @@ const Dashboard = ({ students, groups }) => {
   }).length;
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-4 md:space-y-8 animate-in fade-in duration-500">
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         <StatCard 
-          title="Jami Talabalar" 
+          title="Talabalar" 
           value={totalStudents} 
           icon={Users} 
           color="bg-blue-600"
           trend="+12%"
         />
         <StatCard 
-          title="Guruhlar soni" 
+          title="Guruhlar" 
           value={totalGroups} 
           icon={LayoutDashboard} 
           color="bg-purple-600"
         />
         <StatCard 
-          title="To'lov qilganlar" 
+          title="To'lovlar" 
           value={paidStudents} 
           icon={CheckCircle} 
           color="bg-emerald-600"
@@ -90,21 +90,21 @@ const Dashboard = ({ students, groups }) => {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* Main Chart/Status Area */}
-        <div className="lg:col-span-2 bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden">
+        <div className="lg:col-span-2 bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center">
+            <h2 className="text-lg md:text-xl font-bold text-slate-800 mb-6 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-primary-600" />
               Akademiya Faoliyati
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between items-end">
-                    <span className="text-sm font-semibold text-slate-600">To'lovlar foizi</span>
-                    <span className="text-2xl font-bold text-slate-800">{paymentPercentage}%</span>
+                    <span className="text-xs md:text-sm font-semibold text-slate-600">To'lovlar foizi</span>
+                    <span className="text-xl md:text-2xl font-bold text-slate-800">{paymentPercentage}%</span>
                   </div>
                   <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
                     <div 
@@ -112,27 +112,27 @@ const Dashboard = ({ students, groups }) => {
                       style={{ width: `${paymentPercentage}%` }}
                     ></div>
                   </div>
-                  <p className="text-xs text-slate-400">Oylik to'lovlar rejasi bo'yicha ko'rsatkich</p>
+                  <p className="text-[10px] md:text-xs text-slate-400">Oylik to'lovlar rejasi bo'yicha ko'rsatkich</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                    <div className="text-slate-500 text-xs mb-1">Eng faol guruh</div>
-                    <div className="font-bold text-slate-800">{topGroupName}</div>
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
+                  <div className="bg-slate-50 p-3 md:p-4 rounded-2xl border border-slate-100">
+                    <div className="text-slate-500 text-[10px] md:text-xs mb-1">Eng faol guruh</div>
+                    <div className="font-bold text-slate-800 text-sm md:text-base truncate">{topGroupName}</div>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                    <div className="text-slate-500 text-xs mb-1">Yangi talabalar</div>
-                    <div className="font-bold text-slate-800">+{newStudentsThisMonth} bu oy</div>
+                  <div className="bg-slate-50 p-3 md:p-4 rounded-2xl border border-slate-100">
+                    <div className="text-slate-500 text-[10px] md:text-xs mb-1">Yangi talabalar</div>
+                    <div className="font-bold text-slate-800 text-sm md:text-base">+{newStudentsThisMonth} bu oy</div>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center p-4 bg-gradient-to-br from-primary-600 to-indigo-700 rounded-3xl text-white shadow-xl shadow-primary-200">
+              <div className="flex items-center justify-center p-6 bg-gradient-to-br from-primary-600 to-indigo-700 rounded-2xl md:rounded-3xl text-white shadow-xl shadow-primary-200">
                 <div className="text-center">
-                  <GraduationCap className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-bold mb-1">Muvaffaqiyatli darslar</h3>
-                  <p className="text-primary-100 text-sm opacity-80 mb-4 px-4">Talabalar o'zlashtirish ko'rsatkichi oshmoqda!</p>
-                  <button className="bg-white text-primary-600 px-6 py-2 rounded-xl font-bold text-sm hover:bg-slate-100 transition-all">
+                  <GraduationCap className="w-12 md:w-16 h-12 md:h-16 mx-auto mb-4 opacity-50" />
+                  <h3 className="text-base md:text-lg font-bold mb-1">Muvaffaqiyatli darslar</h3>
+                  <p className="text-primary-100 text-xs md:text-sm opacity-80 mb-4 px-2">Talabalar o'zlashtirish ko'rsatkichi oshmoqda!</p>
+                  <button className="bg-white text-primary-600 px-5 md:px-6 py-2 rounded-xl font-bold text-xs md:text-sm hover:bg-slate-100 transition-all">
                     Hisobotni ko'rish
                   </button>
                 </div>
@@ -143,26 +143,26 @@ const Dashboard = ({ students, groups }) => {
         </div>
 
         {/* Today's Stats */}
-        <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-800 mb-6">Bugungi Davomat</h2>
-          <div className="space-y-6">
-            <div className="flex items-center p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-              <div className="bg-emerald-500 p-2 rounded-xl text-white mr-4">
+        <div className="bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[32px] border border-slate-200 shadow-sm">
+          <h2 className="text-lg md:text-xl font-bold text-slate-800 mb-6 uppercase tracking-wider text-xs md:text-base opacity-50">Bugungi Davomat</h2>
+          <div className="space-y-4 md:space-y-6">
+            <div className="flex items-center p-3 md:p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+              <div className="bg-emerald-500 p-2 rounded-xl text-white mr-4 shadow-lg shadow-emerald-100">
                 <UserCheck className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-emerald-600 font-bold uppercase tracking-wider">Kelganlar</div>
-                <div className="text-xl font-black text-emerald-900">{presentToday} talaba</div>
+                <div className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">Kelganlar</div>
+                <div className="text-lg md:text-xl font-black text-emerald-900">{presentToday} talaba</div>
               </div>
             </div>
 
-            <div className="flex items-center p-4 bg-rose-50 rounded-2xl border border-rose-100">
-              <div className="bg-rose-500 p-2 rounded-xl text-white mr-4">
+            <div className="flex items-center p-3 md:p-4 bg-rose-50 rounded-2xl border border-rose-100">
+              <div className="bg-rose-500 p-2 rounded-xl text-white mr-4 shadow-lg shadow-rose-100">
                 <UserX className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-rose-600 font-bold uppercase tracking-wider">Kelmaganlar</div>
-                <div className="text-xl font-black text-rose-900">{totalStudents - presentToday} talaba</div>
+                <div className="text-[10px] text-rose-600 font-bold uppercase tracking-wider">Kelmaganlar</div>
+                <div className="text-lg md:text-xl font-black text-rose-900">{totalStudents - presentToday} talaba</div>
               </div>
             </div>
 

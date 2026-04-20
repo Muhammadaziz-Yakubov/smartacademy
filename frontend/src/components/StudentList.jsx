@@ -7,14 +7,14 @@ const StudentList = ({ students, groups = [], onAdd, onDelete, onTogglePayment, 
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 md:mb-8">
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Barcha Talabalar</h2>
-          <p className="text-sm text-slate-500">Jami: {students.length} nafar</p>
+          <h2 className="text-lg md:text-xl font-bold text-slate-800">Barcha Talabalar</h2>
+          <p className="text-xs md:text-sm text-slate-500">Jami: {students.length} nafar</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="bg-primary-600 text-white px-6 py-3 rounded-2xl font-bold flex items-center space-x-2 hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+          className="w-full sm:w-auto bg-primary-600 text-white px-5 md:px-6 py-3 md:py-3.5 rounded-2xl font-bold flex items-center justify-center space-x-2 hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20 active:scale-95 text-sm md:text-base"
         >
           <Plus className="w-5 h-5" />
           <span>Talaba Qo'shish</span>

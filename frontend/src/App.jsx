@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, Calendar, LayoutDashboard, Plus, Search, Trash2, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Users, Calendar, LayoutDashboard, Plus, Search, Trash2, CheckCircle, XCircle, Clock, Menu, X } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from './components/Sidebar';
 import StudentList from './components/StudentList';
@@ -17,6 +17,7 @@ const api = axios.create({
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('smart_academy_auth') === 'true');
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [students, setStudents] = useState([]);
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -175,24 +176,48 @@ function App() {
 
   return (
     <div className="flex h-screen bg-slate-50 font-sans text-slate-900 overflow-hidden">
+      {/* Sidebar background overlay for mobile */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden transition-opacity"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={(tab) => {
+          setActiveTab(tab);
+          setIsSidebarOpen(false);
+        }} 
+        onLogout={handleLogout}
+        isOpen={isSidebarOpen}
+      />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">{getPageTitle()}</h1>
-            <p className="text-sm text-slate-500">Smart Academy CRM System</p>
+      <main className="flex-1 overflow-y-auto w-full">
+        <header className="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 md:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden p-2 hover:bg-slate-100 rounded-xl transition-colors"
+            >
+              <Menu className="w-6 h-6 text-slate-600" />
+            </button>
+            <div>
+              <h1 className="text-lg md:text-2xl font-bold text-slate-800 leading-tight">{getPageTitle()}</h1>
+              <p className="text-[10px] md:text-sm text-slate-500">Smart Academy CRM</p>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="relative">
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="relative hidden sm:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
               <input 
                 type="text" 
                 placeholder="Qidiruv..." 
-                className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500 w-64 transition-all"
+                className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary-500 w-40 md:w-64 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -200,7 +225,7 @@ function App() {
           </div>
         </header>
 
-        <div className="p-8 pb-20">
+        <div className="p-4 md:p-8 pb-20">
           {loading ? (
             <div className="flex flex-col items-center justify-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
