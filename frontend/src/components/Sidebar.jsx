@@ -37,18 +37,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         ))}
       </nav>
 
-      <div className="p-6 mt-auto">
-        <div className="bg-slate-900 rounded-3xl p-5 text-white relative overflow-hidden">
-          <div className="relative z-10">
-            <h4 className="text-sm font-bold mb-1 italic">Pro Plan</h4>
-            <p className="text-xs text-slate-400 mb-3 leading-relaxed">Cheksiz talabalar va hisobotlar.</p>
-            <button className="text-xs bg-white text-slate-900 px-4 py-2 rounded-xl font-bold hover:bg-slate-100 transition-all">
-              Batafsil
-            </button>
-          </div>
-          <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-primary-600/20 rounded-full blur-2xl"></div>
-        </div>
-      </div>
+     
     </aside>
   );
 };
