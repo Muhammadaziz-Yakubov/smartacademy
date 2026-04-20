@@ -22,14 +22,42 @@ const StatCard = ({ title, value, icon: Icon, color, trend }) => (
 const Dashboard = ({ students, groups }) => {
   const totalStudents = students.length;
   const totalGroups = groups.length;
-  const paidStudents = students.filter(s => s.isPaid).length;
+  
+  // Real data from s.paid (instead of s.isPaid)
+  const paidStudents = students.filter(s => s.paid).length;
   const unpaidStudents = totalStudents - paidStudents;
   const paymentPercentage = totalStudents > 0 ? Math.round((paidStudents / totalStudents) * 100) : 0;
 
-  // Mock data for "bugungi davomat" (today's attendance)
-  // For a real app, this would come from a specific API call or processed attendance data
-  const presentToday = students.filter(s => s.attendanceStatus === 'bor').length;
+  // Calculate real today's attendance
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   
+  const presentToday = students.filter(student => {
+    return student.attendance && student.attendance.some(record => {
+      const recordDate = new Date(record.date);
+      recordDate.setHours(0, 0, 0, 0);
+      return recordDate.getTime() === today.getTime() && record.status === 'bor';
+    });
+  }).length;
+  
+  // Calculate active group (group with most students)
+  const groupCounts = students.reduce((acc, s) => {
+    if (s.groupId) {
+      acc[s.groupId] = (acc[s.groupId] || 0) + 1;
+    }
+    return acc;
+  }, {});
+  const topGroupId = Object.entries(groupCounts).sort((a, b) => b[1] - a[1])[0]?.[0];
+  const topGroupName = groups.find(g => g._id === topGroupId)?.name || 'Hozircha yo\'q';
+
+  // Calculate new students this month
+  const thisMonth = new Date().getMonth();
+  const thisYear = new Date().getFullYear();
+  const newStudentsThisMonth = students.filter(s => {
+    const createdAt = new Date(s.createdAt);
+    return createdAt.getMonth() === thisMonth && createdAt.getFullYear() === thisYear;
+  }).length;
+
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Stats Grid */}
@@ -90,11 +118,11 @@ const Dashboard = ({ students, groups }) => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                     <div className="text-slate-500 text-xs mb-1">Eng faol guruh</div>
-                    <div className="font-bold text-slate-800">Frontend #1</div>
+                    <div className="font-bold text-slate-800">{topGroupName}</div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
                     <div className="text-slate-500 text-xs mb-1">Yangi talabalar</div>
-                    <div className="font-bold text-slate-800">+24 bu oy</div>
+                    <div className="font-bold text-slate-800">+{newStudentsThisMonth} bu oy</div>
                   </div>
                 </div>
               </div>
